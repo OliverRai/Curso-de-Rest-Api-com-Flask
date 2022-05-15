@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    container_name: Flask
+    ports:
+      - ${PG_PORT}:5432
+    volumes:
+      - ../datadb:/var/lib/postgresql/data
+    env_file: .env
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB_NAME}
+    networks:
+      - db-networks
+
+networks:
+  db-networks:
+    driver: bridge
